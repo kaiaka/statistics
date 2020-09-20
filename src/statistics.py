@@ -38,11 +38,20 @@ def analysis(df):
     rating_C = df.loc[df['scenario'] == 'C']['rating']
     print('')
 
+    # FRIEDMAN
+    # Compare three or more matched groups from rank/score data.
+    # https: // www.graphpad.com / support / faqid / 1790 /
+    # https://docs.scipy.org/doc/scipy-0.15.1/reference/generated/scipy.stats.friedmanchisquare.html
     print('Friedman')
     stat, p = friedmanchisquare(rating_A, rating_B, rating_C)
     significance = p < 0.05
     print('stat={:.3f} p={:.3f} significant={}'.format(stat, p, significance))
 
+    # WILCOXON - Between which independent variables is the difference?
+    # compare two paired groups from rank/score data.
+    # https://www.graphpad.com/support/faqid/1790/
+
+    # ANOVA
     print('ANOVA')
     significance = 'no'
     stat, p = f_oneway(rating_A, rating_B, rating_C)
